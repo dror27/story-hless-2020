@@ -4,13 +4,13 @@ This repository contains files and code supporting the Birmingham City Council H
 
 ## Data Audit
 
-All datafiles are from https://data.birmingham.gov.uk/ 
+All datafiles are from https://data.birmingham.gov.uk/organization/birmingham-city-council 
 
 Purchase Card Files: (data/data.birmingham.gov.uk)
 
 Month | Filename
 --- | ---
-10/2019 | purchase-card-publish-spend-october-2019.xls
+10/2019 | [purchase-card-publish-spend-october-2019.xls](data/data.birmingham.gov.uk/purchase-card-publish-spend-october-2019.xls)
 11/2019 | publish-spend-november-2019.xls
 12/2019 | publish-spend-december-2019.xls
 01/2020 | publish-spend-january-2020.xls
