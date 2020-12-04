@@ -1,0 +1,118 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Load required libraries
+
+```{r}
+library(dplyr)
+library(readxl)
+library(stringr)
+library(tidyverse)
+```
+
+setup list of purchase card files
+
+```{r}
+cc_folder = "../../../data/data.birmingham.gov.uk"
+cc_files = c(
+  "2019-10:purchase-card-publish-spend-october-2019.xls", 
+  "2019-11:publish-spend-november-2019-mod.xls", 
+  "2019-12:publish-spend-december-2019.xls", 
+  "2020-01:publish-spend-january-2020.xls", 
+  "2020-02:publish-spend-february-2020.xls", 
+  "2020-03:publish-spend-march-2020.xls", 
+  "2020-04:publish-spend-april-2020.xls", 
+  "2020-05:publish-spend-may-2020.xls", 
+  "2020-06:publish-spend-june-2020.xls", 
+  "2020-07:publish-spend-july-2020.xls", 
+  "2020-08:publish-spend-august-2020.xls", 
+  "2020-09:publish-spend-purchase-card-itemised-transactions-september-20-all-directorates.xls"
+  )
+```
+
+read purchase card files into a single dataset
+
+```{r}
+
+## function to make sure a column exists (adds it if it does exist)
+fncols <- function(data, cname) {
+  add <-cname[!cname%in%names(data)]
+  if(length(add)!=0) data[add] <- NA
+  data
+}
+
+# read a purchase card file, normalize columns (as different month files vary)
+read_cc_file <- function(folder, file) {
+  path <- paste(folder, word(file, 2, sep=":"), sep="/")
+  print(path)
+  card <- read_excel(path)
+  card <- fncols(card, "MERCHANT NAME")
+  card.norm <- card %>% select(`TRANS DATE`, `BILLING GROSS AMT`, `MERCHANT NAME`, `CARD NUMBER`, `TRANS CAC CODE 1`, `TRANS CAC DESC 1`, `TRANS CAC CODE 2`, `TRANS CAC DESC 2`, Directorate)
+  card.norm$Directorate = toupper(card.norm$Directorate)
+  card.norm$month = word(file, 1, sep=":")
+  print(word(file, 1, sep=":"))
+  
+  card.norm
+}
+
+# loop on all files and aggregate into a single dataset called cc_all
+all <- read_cc_file(cc_folder, cc_files[[1]])
+for ( file in cc_files[-1] ) {
+  more <- read_cc_file(cc_folder, file)
+  all <- rbind(all, more)
+}
+rm(more)
+```
+
+build aggregation subsets
+
+```{r}
+
+# all expenses with amount 3000
+all3000 <- all %>% filter(`BILLING GROSS AMT`==3000)
+
+# expenses by directorate
+all_by_dir <- all %>% 
+                count(month, Directorate, wt=`BILLING GROSS AMT`) %>%
+                rename(total=n)
+all_by_dir <- all_by_dir[order(-all_by_dir$total),]
+
+# NEIGHBOURHOODS directorate by month
+all.n = all %>% filter(Directorate=="NEIGHBOURHOODS")
+all.n.c <- all.n %>% 
+            count(month, Directorate, wt=`BILLING GROSS AMT`) %>%
+            rename(total=n)
+
+# expenses with amount 3000 by month
+all.3000.c = all3000 %>% 
+              count(month, Directorate, wt=`BILLING GROSS AMT`) %>%
+              rename(total=n)
+
+# summary dataset build: all expenses (counts) by month
+all.c <- all %>% 
+              count(month, wt=`BILLING GROSS AMT`) %>%
+              rename(total=n)
+
+
+# add neighboorhoods and c3000 columns to summary dataset
+all.c$neighboorhoods = all.n.c$total
+all.c$c3000 = all.3000.c$total
+
+# calc homeless expenses and add as column to summary
+all.n.hless = all.n %>% filter(str_detect(`TRANS CAC DESC 2`, "less|Less|LESS"))
+all.n.hless.c = all.n.hless %>% 
+                count(month, wt=`BILLING GROSS AMT`) %>%
+                rename(total=n)
+all.c$hless <- all.n.hless.c$total
+
+all.c
+```
+
+sumamrise
+
+```{r}
+all.c %>% summarize_if(is.numeric, sum, na.rm=TRUE)
+```
+
