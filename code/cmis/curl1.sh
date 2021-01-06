@@ -1,0 +1,13 @@
+curl 'https://birmingham.cmis.uk.com/birmingham/' \
+  -H 'Connection: keep-alive' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Mobile Safari/537.36' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+  -H 'Sec-Fetch-Site: none' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Accept-Language: en-US,en;q=0.9,he;q=0.8' \
+  -H 'Cookie: .ASPXANONYMOUS=P0XcEhqEx95Nm2deYs1vp_Yhy2si96ebNOnaT2xkvprFjRYpSFccDm8xQIel3b-Unnjrxqj6Or759GY9htUuOFWEYhml46ZV9zltUk7Dz7W8wT0I0; DateInputMode=Simple; language=en-GB; SERVERID=birminghamcmisukcom-8989; ASP.NET_SessionId=bo5eh1hxiipwynrvm0vkti1v' \
+  --compressed

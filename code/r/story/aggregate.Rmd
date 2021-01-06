@@ -115,4 +115,10 @@ sumamrise
 ```{r}
 all.c %>% summarize_if(is.numeric, sum, na.rm=TRUE)
 ```
+Write files for outside analysis
+```{r}
+write.csv(all, "output/bcc-cc-all.csv")
+write.csv(all.n, "output/bcc-cc-all-neighboorhoods.csv")
+
+```
 
