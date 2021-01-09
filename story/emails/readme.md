@@ -8,7 +8,7 @@
 | 04/12/2020 | Information Governance Team | Delay notice | [14_201203_FOI_Delay_Notice.pdf](14_201203_FOI_Delay_Notice.pdf) | 
 | 09/12/2020 | D Kessler | Update request | [15_201209_FOI_Update_Req.pdf](15_201209_FOI_Update_Req.pdf) | 
 | 23/12/2020 | Information Commissioner's Office | Complaint confirmation | [16_201223_FOI_Update_Req.pdf](16_201223_FOI_Update_Req.pdf)
-| 23/12/2020 | D Kessler | Internal review request | [16_201223_Internal_Review_Req.pdf](16_201223_Internal_Review_Req.pdf)
+| 23/12/2020 | D Kessler | Internal review request | [17_201223_Internal_Review_Req.pdf](17_201223_Internal_Review_Req.pdf)
 
 ### Request for Comment from Birmingham City Council
 #### email trail:
