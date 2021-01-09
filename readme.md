@@ -16,3 +16,4 @@ published on [medium.com](https://drorkessler.medium.com/)
 * [Council documents scraped from CMIS](data/birmingham.cmis.uk.com)
 #### Docs
 * [Email trails for FOI and request for comment](story/emails)
+* [Academic references](refs)
