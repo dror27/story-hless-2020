@@ -5,6 +5,8 @@ This repository contains files and code supporting the Birmingham City Council H
 ### Story recap
 Birmingham City Council billing practices may obscure significant and recurring spending of close to £1.5m on homeless accommodation over a twelve months period ending on September 2020.
 
+published on [medium.com](https://drorkessler.medium.com/)
+
 ### Repository main folders
 #### Code
 * [R code for aggregating credit card transactions](code/r/story)
